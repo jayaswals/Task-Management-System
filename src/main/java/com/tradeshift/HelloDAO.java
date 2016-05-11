@@ -1,21 +1,10 @@
 package com.tradeshift;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import javax.sql.DataSource;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @Repository
 public class HelloDAO {
-    private JdbcTemplate jdbcTemplate;
+   /* private JdbcTemplate jdbcTemplate;
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -45,5 +34,5 @@ public class HelloDAO {
         } else {
             return messages.get(0);
         }
-    }
+    }*/
 }

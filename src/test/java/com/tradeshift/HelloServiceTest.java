@@ -9,7 +9,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class HelloServiceTest {
 
-    private HelloDAO helloDAO;
+    /*private HelloDAO helloDAO;
     private HelloService helloService;
 
     @Before
@@ -21,5 +21,5 @@ public class HelloServiceTest {
     @Test
     public void does_actually_say_it() {
         assertEquals("Shift Happens!", helloService.sayIt());
-    }
+    }*/
 }

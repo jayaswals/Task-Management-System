@@ -8,17 +8,137 @@
     <packaging>war</packaging>
     <name>Interview Task Service</name>
     <properties>
-        <jetty.version>9.0.2.v20130417</jetty.version>
+       <!--  <jetty.version>9.0.2.v20130417</jetty.version>
         <jersey.version>1.19</jersey.version>
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>
-        <postgres.version>9.4.1207.jre7</postgres.version>
+        <postgres.version>9.4.1207.jre7</postgres.version> -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.2.4.RELEASE</spring.version>
+       <!--  <spring.version>4.2.4.RELEASE</spring.version> -->
+        <org.springframework.version>4.1.2.RELEASE</org.springframework.version>
+ <org.apache.cxf.version>2.7.13</org.apache.cxf.version>
+ <org.apache.derby.version>10.8.3.0</org.apache.derby.version>
+ 
     </properties>
     <dependencies>
+    
+     <dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>6.8</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+	</dependency>
+
+	<!-- Java DB -->
+	<dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+      <version>${org.apache.derby.version}</version>
+    </dependency>
+    <dependency>
+	<groupId>org.apache.derby</groupId>
+	<artifactId>derbyclient</artifactId>
+	<version>${org.apache.derby.version}</version>
+	</dependency>
+	
+	
+	
+	<!-- Spring -->
+	
+	  <dependency>                                      
+    <groupId>org.slf4j</groupId>                    
+    <artifactId>slf4j-simple</artifactId>           
+    <version>1.6.4</version>                        
+    <scope>runtime</scope>                          
+  </dependency> 
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.0.1</version>
+		<scope>provided</scope>
+	</dependency>
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<!-- Apache CXF Dependencies -->
+		 <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-bundle</artifactId>
+        <version>${org.apache.cxf.version}</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            </exclusion>
+            <exclusion>
+            	<artifactId>spring-asm</artifactId>
+            	<groupId>org.springframework</groupId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${org.apache.cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${org.apache.cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${org.apache.cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>${org.apache.cxf.version}</version>
+		</dependency>	
+		<!-- Jackson The JSON Producer  dependency -->	
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		
+		<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>1.9.0-rc1</version>
+				<scope>test</scope>
+			</dependency>
+			
         <!-- Jersey -->
-        <dependency>
+   <!--      <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
             <version>${jersey.version}</version>
@@ -68,10 +188,10 @@
                      <artifactId>spring-aop</artifactId>
                  </exclusion>
              </exclusions>
-         </dependency>
+         </dependency> -->
 
         <!-- Spring -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
@@ -100,32 +220,32 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
-        </dependency>
+        </dependency> -->
 
         <!-- Postgres -->
-        <dependency>
+       <!--  <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgres.version}</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency> -->
 
         <!-- Tests -->
-        <dependency>
+       <!--  <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>${mockito.version}</version>
-        </dependency>
-        <dependency>
+        </dependency> -->
+       <!--  <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
-        </dependency>
+        </dependency> -->
     </dependencies>
     <build>
         <plugins>
-            <plugin>
+           <!--  <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
@@ -139,7 +259,7 @@
                     <stopPort>9999</stopPort>
                     <scanIntervalSeconds>5</scanIntervalSeconds>
                 </configuration>
-            </plugin>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

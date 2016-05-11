@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 @Service
 public class HelloService {
-    private HelloDAO helloDAO;
+   /* private HelloDAO helloDAO;
 
     @Autowired
     public HelloService(HelloDAO helloDAO) {
@@ -28,5 +28,5 @@ public class HelloService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

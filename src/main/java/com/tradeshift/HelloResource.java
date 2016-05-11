@@ -9,10 +9,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Component
-@Path("hello")
+//@Component
+//@Path("hello")
 public class HelloResource {
-    private HelloService helloService;
+  /*  private HelloService helloService;
 
     @Autowired
     public HelloResource(HelloService helloService) {
@@ -37,5 +37,5 @@ public class HelloResource {
     @Produces(MediaType.TEXT_PLAIN)
     public String getOne() {
         return helloService.getOne();
-    }
+    }*/
 }

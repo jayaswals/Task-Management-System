@@ -1,4 +1,4 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
+<!-- <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -19,5 +19,100 @@
         <property name="url" value="jdbc:postgresql://localhost:5432/tasks" />
         <property name="username" value="taskuser" />
         <property name="password" value="taskpassword" />
+    </bean>
+</beans>
+ -->
+ 
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+ 	http://cxf.apache.org/jaxrs
+ 	http://cxf.apache.org/schemas/jaxrs.xsd
+ 	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+ 	http://cxf.apache.org/jaxws
+ 	http://cxf.apache.org/schemas/jaxws.xsd
+ 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
+ 	http://www.springframework.org/schema/context
+ 	http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+ 
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<context:component-scan base-package="com.tradeshift.*" />
+ 
+	<jaxrs:server id="todoService" address="/todo">
+		<jaxrs:providers>
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<ref bean="todoServiceImpl" />
+		</jaxrs:serviceBeans>
+		<jaxrs:extensionMappings>
+			<entry key="xml" value="application/xml" />
+			<entry key="json" value="application/json" />
+		</jaxrs:extensionMappings>
+	</jaxrs:server>
+ 
+    <bean id="todoServiceImpl" class="com.tradeshift.todo.impl.ToDoServiceImpl"/>
+    
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+
+	<bean id="connection" class="com.tradeshift.todo.dao.impl.DerbyConnection"/>
+	
+	 <bean id="jacksonjsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+        <property name="mapper">
+            <bean class="org.codehaus.jackson.map.ObjectMapper">
+                <property name="serializationInclusion" value="NON_NULL"/>
+            </bean>
+        </property>
+    </bean>
+	    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref bean="jacksonjsonProvider"/>
+        </property>
+        <property name="targetMethod">
+            <value>configure</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <util:constant static-field="org.codehaus.jackson.map.SerializationConfig$Feature.WRAP_ROOT_VALUE"/>
+                <value type="boolean">true</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref bean="jacksonjsonProvider"/>
+        </property>
+        <property name="targetMethod">
+            <value>configure</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <util:constant static-field="org.codehaus.jackson.map.DeserializationConfig$Feature.UNWRAP_ROOT_VALUE"/>
+                <value type="boolean">true</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref bean="jacksonjsonProvider"/>
+        </property>
+        <property name="targetMethod">
+            <value>configure</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <util:constant static-field="org.codehaus.jackson.JsonParser$Feature.ALLOW_UNQUOTED_FIELD_NAMES"/>
+                <value type="boolean">true</value>
+            </list>
+        </property>
     </bean>
 </beans>
